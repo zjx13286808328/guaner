@@ -28,9 +28,13 @@ class Login extends Controller
   		$name       = $request->param('username');
   		$password   = md5($request->param('password'));
   		$parm       =[
-  					  'name'     => $name,					  
-  		];
-  		$validate   = new AdminUserValidate();
+  					  'name'     => $name,
+  					  'password' => $password					  
+  					 ];
+  		$res        = $validate->scene->('AdminUserValidate')->check($parm);
+  		if(!$res){
+  			$this->error($validate->getError());
+  		}
   		// var_dump($validate);exit;
   		$user       = Db::table('bm_admins')->where($parm)->find();
   		if($user){
