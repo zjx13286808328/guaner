@@ -4,7 +4,7 @@ use think\Controller;
 use think\Session;	
 use think\Request;
 use app\admin\validate\AdminUserValidate;
-use app\admin\model\AdminUserModel;
+use app\admin\model\AdminUserModel as AdminUserModel;
 use think\Db;
 use think\Loader;
 
@@ -23,40 +23,43 @@ class Login extends Controller
      *	登录 
      */
   	public function dologin()
-  	{
+  	{  
+
   		$request = request();
 
-  		$name       = $request->param('username');
-  		$password   = md5($request->param('password'));
+
+      
+      $name       = $request->param('name');
+      $password   = md5($request->param('password'));
+      // return $name;
   		// dump($request->param());
-      $parm       =[
+      $parm    =[
   					  'name'     => $name,
   					  'password' => $password					  
-  					 ];
-             dump($parm);
+  					    ];
+             // dump($parm);
   		// $validate   = new AdminUserValidate();
-  		$validate = Loader::validate('AdminUserValidate');
+  		 // 验证器
+            $validate = Loader::validate('AdminUserValidate');
+            // return $validate;
+            if(!$validate->check($parm)){
+                return($validate->getError());
+            }
 
-		if(!$validate->check($parm)){
-    		dump($validate->getError());
-		}
 
-      // var_dump($validate);exit;
-  		if(!$res){
-  			$this->error($validate->getError());
-  		}
-  		// var_dump($validate);exit;
-  		$user       = Db::table('bm_admins')->where($parm)->find();
-  		if($user){
-  			if($password==$user->password){
-  				$this->success('登录成功','index/index');
-  			}else{
-  				$this->error('密码错误');
-  			}
+    
+  		// // var_dump($validate);exit;
+  		// $user       = Db::table('bm_admins')->where($parm)->find();
+  		// if($user){
+  		// 	if($password==$user->password){
+  		// 		$this->success('登录成功','index/index');
+  		// 	}else{
+  		// 		$this->error('密码错误');
+  		// 	}
   			
-  		}else{
-  			$this->error('用户不存在');
-  		}
+  		// }else{
+  		// 	$this->error('用户不存在');
+  		// }
   		// var_dump($user);exit;
 
   	}

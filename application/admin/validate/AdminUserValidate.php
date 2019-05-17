@@ -26,13 +26,13 @@ class AdminUserValidate extends Validate
      *
      * @var array
      */
-     // protected $message = [
-     // 		'asd.required'  =>  '名称不能为空',
-     // 		// 'name.min'       =>  '名称最少3个字符',
-     // 		// 'name.max'       =>  '名称最多25个字符',
-     // 		'password.required'  =>  '密码不能为空',
-     // 		'password.length'    =>  '密码长度在6到20位',
-     // ];
+     protected $message = [
+     		'name.require'  =>  '名称不能为空',
+     		'name.min'       =>  '名称最少3个字符',
+     		'name.max'       =>  '名称最多25个字符',
+     		'password.require'  =>  '密码不能为空',
+     		'password.length'    =>  '密码长度在6到20位'
+     ];
 
 
 
