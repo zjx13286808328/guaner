@@ -6,6 +6,7 @@ use think\Request;
 use app\admin\validate\AdminUserValidate;
 use app\admin\model\AdminUserModel;
 use think\Db;
+use think\Loader;
 
 class Login extends Controller
 {	
@@ -27,11 +28,20 @@ class Login extends Controller
 
   		$name       = $request->param('username');
   		$password   = md5($request->param('password'));
-  		$parm       =[
+  		// dump($request->param());
+      $parm       =[
   					  'name'     => $name,
   					  'password' => $password					  
   					 ];
-  		$res        = $validate->scene->('AdminUserValidate')->check($parm);
+             dump($parm);
+  		// $validate   = new AdminUserValidate();
+  		$validate = Loader::validate('AdminUserValidate');
+
+		if(!$validate->check($parm)){
+    		dump($validate->getError());
+		}
+
+      // var_dump($validate);exit;
   		if(!$res){
   			$this->error($validate->getError());
   		}

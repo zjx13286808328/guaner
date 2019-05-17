@@ -36,7 +36,7 @@
     </script> -->
     <div class="login-logo"><h1>X-ADMIN V1.1</h1></div>
     <div class="login-box">
-        <form class="layui-form layui-form-pane myform" action="{:url('Login/dologin')}" >
+        <form class="layui-form layui-form-pane myform" action="##" >
               
             <h3>登录你的帐号</h3>
             <label class="login-title" for="username">帐号</label>
@@ -81,13 +81,28 @@
     </div>
     <script>
         $(function  () {
+            var formData = $(".myform").serialize()
+            alert(formData);
             layui.use('form', function(){
               var form = layui.form();
               //监听提交
               form.on('submit(login)', function(data){
-                layer.msg(JSON.stringify(data.field),function(){
-                    location.href='index.html'
-                });
+                $.ajax({
+                        type: "POST",
+                        url: "{:url('login/dogin')}",
+                        contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+                        data: {username:$("#username").val(), password:$("#password").val()},
+                        dataType: "json",
+                        success: function(data){
+                                    console.log(data);
+                                }，
+                        error:function(e){
+                                    console.log(e);
+                        }
+                    });
+                // layer.msg(JSON.stringify(data.field),function(){
+                //     location.href='index.html'
+                // });
                 return false;
               });
             });

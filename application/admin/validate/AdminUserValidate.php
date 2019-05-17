@@ -15,8 +15,8 @@ class AdminUserValidate extends Validate
      * @var array
      */
      protected $rule = [
-     		'username'  =>  'required|min:3|max:25',
-     		'password'  =>  'required|length:6,20', 
+     		'name'  =>  'require|min:3|max:25',
+     		'password'  =>  'require|length:6,20', 
      ];
 
 
@@ -26,13 +26,13 @@ class AdminUserValidate extends Validate
      *
      * @var array
      */
-     protected $message = [
-     		'username.required'  =>  '名称不能为空',
-     		'username.min'       =>  '名称最少3个字符',
-     		'username.max'       =>  '名称最多25个字符',
-     		'password.required'  =>  '密码不能为空',
-     		'password.length'    =>  '密码长度在6到20位',
-     ];
+     // protected $message = [
+     // 		'asd.required'  =>  '名称不能为空',
+     // 		// 'name.min'       =>  '名称最少3个字符',
+     // 		// 'name.max'       =>  '名称最多25个字符',
+     // 		'password.required'  =>  '密码不能为空',
+     // 		'password.length'    =>  '密码长度在6到20位',
+     // ];
 
 
 
