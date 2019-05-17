@@ -16,8 +16,32 @@
 </head>
 <body>
     <script type="text/javascript">
-       function login(){
-        var name = $('#username').val();
+       // function login(){
+       //  var name = $('#username').val();
+       //  var password = $('#password').val();
+       //  console.log();
+       //  // alert(formData);
+       //      $.ajax({
+       //          type: "POST",
+       //          dataType: "json",
+       //          url: "{:url('Login/dologin')}",
+       //          data: {'name':name,'password':password},
+       //          success:function(data){
+       //              console.log(data);
+       //              // alert(data);
+                   
+       //          },
+       //          error:function(data){
+       //              // alert(data);
+       //               console.log(data);
+       //          }
+
+       //      });
+       //      return false; 
+       // }
+       $(document).on('click','#sad',function () {
+           // alert('123');
+                   var name = $('#username').val();
         var password = $('#password').val();
         console.log();
         // alert(formData);
@@ -27,21 +51,24 @@
                 url: "{:url('Login/dologin')}",
                 data: {'name':name,'password':password},
                 success:function(data){
-                    
                     console.log(data);
+                    // alert(data);
                    
                 },
                 error:function(data){
-                    
+                    // alert(data);
                      console.log(data);
                 }
 
             });
-       }
+            return false; 
+
+       })
     </script>
     <div class="login-logo"><h1>X-ADMIN V1.1</h1></div>
     <div class="login-box">
-        <form class="layui-form layui-form-pane myform" action="" >
+        <form action=""></form>
+        <form class="layui-form layui-form-pane myform">
               
             <h3>登录你的帐号</h3>
             <label class="login-title" for="username">帐号</label>
@@ -59,7 +86,7 @@
                 </div>
             </div>
             <div class="form-actions">
-                <button class="btn btn-warning pull-right" lay-submit lay-filter="login" onclick="login()"  type="submit" ">登录</button> 
+                <button class="btn btn-warning pull-right"  lay-filter="login"  type="" id="sad">登录</button> 
                 <div class="forgot"><a href="#" class="forgot">忘记帐号或者密码</a></div>     
             </div>
         </form>
@@ -115,7 +142,7 @@
         // })
         
     </script>
-    <script>
+  <!--   <script>
     //百度统计可去掉
     var _hmt = _hmt || [];
     (function() {
@@ -124,6 +151,6 @@
       var s = document.getElementsByTagName("script")[0]; 
       s.parentNode.insertBefore(hm, s);
     })();
-    </script>
+    </script> -->
 </body>
 </html>

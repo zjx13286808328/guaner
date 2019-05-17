@@ -3,18 +3,12 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Session;
 use think\Request;
-use app\admin\controller\Common;
 
-class Index extends Common
+class Common extends Controller
 {
     public function index()
     {
-
+    	//判断登录
         return view();
     }
-
-   	public function sad()
-   	{
-   		return $this->fetch('');
-   	}
 }

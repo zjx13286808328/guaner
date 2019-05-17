@@ -16,7 +16,7 @@ class AdminUserValidate extends Validate
      */
      protected $rule = [
      		'name'  =>  'require|min:3|max:25',
-     		'password'  =>  'require|length:6,20', 
+     		// 'password'  =>  'require|length:6,20', 
      ];
 
 
@@ -30,8 +30,8 @@ class AdminUserValidate extends Validate
      		'name.require'  =>  '名称不能为空',
      		'name.min'       =>  '名称最少3个字符',
      		'name.max'       =>  '名称最多25个字符',
-     		'password.require'  =>  '密码不能为空',
-     		'password.length'    =>  '密码长度在6到20位'
+     		// 'password.require'  =>  '密码不能为空',
+     		// 'password.length'    =>  '密码长度在6到20位'
      ];
 
 

@@ -29,22 +29,31 @@ class Login extends Controller
 
 
       
-      $name       = $request->param('name');
-      $password   = md5($request->param('password'));
+      $name       = trim($request->param('name'));
+      $password   = trim(md5($request->param('password')));
       // return $name;
   		// dump($request->param());
       $parm    =[
   					  'name'     => $name,
   					  'password' => $password					  
   					    ];
-             // dump($parm);
-  		// $validate   = new AdminUserValidate();
-  		 // 验证器
-            $validate = Loader::validate('AdminUserValidate');
-            // return $validate;
-            if(!$validate->check($parm)){
-                return($validate->getError());
-            }
+             
+  		// 验证器
+      $validate = Loader::validate('AdminUserValidate');
+      // return $validate;
+      if(!$validate->check($parm)){
+      return($validate->getError());
+      }
+      $user = new AdminUserModel();
+      $res = $user->panduan($name);
+      dump($res);
+      $res = json_encode($res);
+
+      if($res){
+        return $res;        
+      }else{
+        return 0;
+      }
 
 
     
