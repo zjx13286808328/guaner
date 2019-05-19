@@ -31,7 +31,7 @@ class Login extends Controller
       
       $name       = trim($request->param('name'));
       $password   = trim(md5($request->param('password')));
-      // return $name;
+      // return $password;
   		// dump($request->param());
       $parm    =[
   					  'name'     => $name,
@@ -42,18 +42,26 @@ class Login extends Controller
       $validate = Loader::validate('AdminUserValidate');
       // return $validate;
       if(!$validate->check($parm)){
-      return($validate->getError());
-      }
-      $user = new AdminUserModel();
-      $res = $user->panduan($name);
-      dump($res);
-      $res = json_encode($res);
-
-      if($res){
-        return $res;        
+        return json(['code'=>'204','msg'=>$validate->getError()]);
       }else{
-        return 0;
+        $user = new AdminUserModel();
+        $admin = $user->panduan($name);
+      // return $admin['password'];
+
+        if($admin){
+          if($password == $admin['password']){
+            session('admin',$admin);
+            return json(['code'=>200,'msg'=>'验证ok']);
+          
+          }else{
+            return json(['code'=>201,'msg'=>'密码错误']);
+          }        
+        }else{
+          return json(['code'=>202,'msg'=>'用户不存在']);
+        }
+
       }
+      
 
 
     

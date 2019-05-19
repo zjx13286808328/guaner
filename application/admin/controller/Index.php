@@ -9,7 +9,7 @@ class Index extends Common
 {
     public function index()
     {
-
+    	// var_dump(session('admin'));exit;
         return view();
     }
 
