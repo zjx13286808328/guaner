@@ -26,7 +26,7 @@ class Login extends Controller
   	{  
 
   		$request = request();
-
+      
 
       
       $name       = trim($request->param('name'));
