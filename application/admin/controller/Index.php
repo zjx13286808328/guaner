@@ -10,7 +10,10 @@ class Index extends Common
     public function index()
     {
     	// var_dump(session('admin'));exit;
-        return view();
+    	$admin = session::get('admin');
+    	$admin = $admin['name'];
+    	// var_dump($admin);exit;
+        return $this->fetch('index',['admin'=>$admin]);
     }
 
    	public function sad()

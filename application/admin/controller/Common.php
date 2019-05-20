@@ -6,9 +6,10 @@ use think\Request;
 
 class Common extends Controller
 {
-    public function index()
-    {
-    	//判断登录
-        return view();
-    }
+    public function _initialize(){
+		if(!session('admin')){
+			//没有session，提示用户登录
+			$this->error('请先登录后操作',url('Login/index'));
+		}
+	}
 }
