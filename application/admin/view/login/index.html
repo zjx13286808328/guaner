@@ -43,13 +43,14 @@
            // alert('123');
                    var name = $('#username').val();
         var password = $('#password').val();
+        var capcha = $('#capcha').val();
         // console.log();
         // alert(formData);
             $.ajax({
                 type: "POST",
                 dataType: "json",
                 url: "{:url('Login/dologin')}",
-                data: {'name':name,'password':password},
+                data: {'name':name,'password':password,'capcha':capcha},
                 success:function(data){
                     if(data.code == 200){
                        window.location.href= "{:url('Index/index')}";
@@ -90,7 +91,8 @@
                   <input type="password" name="password" id="password" lay-verify="required" placeholder="请输入你的密码" autocomplete="off" class="layui-input">
                 </div>
             </div>
-            <img src="{:captcha_src()}" alt="captcha" />
+            <input type="text" name="capcha" id="capcha" class="layui-input">
+            <div>{:captcha_img()}</div>
 
             <div class="form-actions">
                 <button class="btn btn-warning pull-right"  lay-filter="login"  type="" id="sad">登录</button> 

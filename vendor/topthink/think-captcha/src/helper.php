@@ -45,8 +45,11 @@ function captcha_src($id = "")
  * @return mixed
  */
 function captcha_img($id = "")
-{
-    return '<img src="' . captcha_src($id) . '" alt="captcha" />';
+{	
+	$js_src = "this.src='".captcha_src()."'";
+    return '<img src="' . captcha_src($id) . '" title="点击更新验证码" alt="点击更新验证码" onclick="'.$js_src.'" />';
+
+    // return '<img src="' . captcha_src($id) . '" alt="captcha" />';
 }
 
 

@@ -26,12 +26,10 @@ class Login extends Controller
   	{  
 
   		$request = request();
-      
-
-      
       $name       = trim($request->param('name'));
       $password   = trim(md5($request->param('password')));
-      // return $password;
+      $capcha     = $request->param('capcha');
+      
   		// dump($request->param());
       $parm    =[
   					  'name'     => $name,
@@ -41,16 +39,21 @@ class Login extends Controller
   		// 验证器
       $validate = Loader::validate('AdminUserValidate');
       // return $validate;
+
       if(!$validate->check($parm)){
         return json(['code'=>'204','msg'=>$validate->getError()]);
       }else{
+        if(!captcha_check($capcha)) {
+                // 校验失败
+                $this->error('验证码不正确');
+        }
         $user = new AdminUserModel();
         $admin = $user->panduan($name);
-      // return $admin['password'];
 
         if($admin){
           if($password == $admin['password']){
             session('admin',$admin);
+            session('capcha',$capcha);
             return json(['code'=>200,'msg'=>'验证ok']);
           
           }else{
@@ -59,7 +62,7 @@ class Login extends Controller
         }else{
           return json(['code'=>202,'msg'=>'用户不存在']);
         }
-
+         
       }
       
 
