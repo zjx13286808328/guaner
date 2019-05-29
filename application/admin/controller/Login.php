@@ -52,8 +52,8 @@ class Login extends Controller
 
         if($admin){
           if($password == $admin['password']){
-            session('admin',$admin);
-            session('capcha',$capcha);
+            session('admin',$admin['name']);
+            // session('capcha',$capcha);
             return json(['code'=>200,'msg'=>'验证ok']);
           
           }else{
@@ -89,8 +89,8 @@ class Login extends Controller
 
     public function out()
     {
-    	session('admininfo',null);
-    	session('system',null);
+    	session('admin',null);
+    	
     	$this->success('注销成功',url('Login/index'));
     	
 

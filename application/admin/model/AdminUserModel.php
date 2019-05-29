@@ -14,4 +14,9 @@ class AdminUserModel extends Model{
     {
         return Db::name('bm_admins')->where('name',$name)->find();
     }
+
+    function adminuser(){
+    	return Db::query('select * from bm_admins');
+    	// return Db::name('bm_admins')->select();
+    }
 }

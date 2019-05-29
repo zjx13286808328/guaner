@@ -11,8 +11,8 @@ class Index extends Common
     {
     	// var_dump(session('admin'));exit;
     	$admin = session::get('admin');
-    	$admin = $admin['name'];
     	// var_dump($admin);exit;
+    	
         return $this->fetch('index',['admin'=>$admin]);
     }
 
