@@ -3,15 +3,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>后台登录-X-admin1.1</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="./css/font.css">
-	<link rel="stylesheet" href="./css/xadmin.css">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
-    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script src="./lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="./js/xadmin.js"></script>
+    <link rel="stylesheet" href="__admin__/css/font.css">
+  <link rel="stylesheet" href="__admin__/css/xadmin.css">
+     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
+    <script type="text/javascript" src="__admin__/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="__admin__/js/swiper-3.4.2.min.js"></script>
+    <script src="__admin__/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="__admin__/js/xadmin.js"></script>
+
 
 </head>
 <body>
@@ -21,7 +22,7 @@
         <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form">
+            <form class="layui-form" action="{:url('Admin/doadd')}">
                 <div class="layui-form-item">
                     <label for="L_email" class="layui-form-label">
                         <span class="x-red">*</span>邮箱
@@ -39,7 +40,7 @@
                         <span class="x-red">*</span>昵称
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_username" name="username" required="" lay-verify="nikename"
+                        <input type="text" id="L_username" name="name" required="" lay-verify="nikename"
                         autocomplete="off" class="layui-input">
                     </div>
                 </div>
@@ -48,7 +49,7 @@
                         <span class="x-red">*</span>密码
                     </label>
                     <div class="layui-input-inline">
-                        <input type="password" id="L_pass" name="pass" required="" lay-verify="pass"
+                        <input type="password" id="L_pass" name="password" required="" lay-verify="pass"
                         autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid layui-word-aux">
@@ -60,7 +61,7 @@
                         <span class="x-red">*</span>确认密码
                     </label>
                     <div class="layui-input-inline">
-                        <input type="password" id="L_repass" name="repass" required="" lay-verify="repass"
+                        <input type="password" id="L_repass" name="repassword" required="" lay-verify="repass"
                         autocomplete="off" class="layui-input">
                     </div>
                 </div>

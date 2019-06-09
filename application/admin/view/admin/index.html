@@ -1,5 +1,7 @@
 {extend name='public/base'/}
 {block name='main'}
+<script type="text/javascript" src="__admin__/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="__admin__/js/swiper-3.4.2.min.js"></script>
         <!-- 右侧主体开始 -->
         <div class="page-content">
           <div class="content">
@@ -23,7 +25,13 @@
                   </div>
                 </div> 
             </form>
-            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="member_add('添加用户','member-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn"
+
+                
+                onclick="member_add('添加用户','{:url(\'Admin/add\')}','600','500')"
+                >
+
+                <i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
             <table class="layui-table">
                 <thead>
                     <tr>
@@ -66,7 +74,7 @@
                             <input type="checkbox" value="1" name="">
                         </td>
                         <td>
-                            1
+                            {$vo['id']}
                         </td>
                         <td>
                             <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
@@ -89,8 +97,8 @@
                             2017-01-01 11:11:42
                         </td>
                         <td class="td-status">
-                            <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                已启用
+                            <span class="layui-btn layui-btn-normal layui-btn-mini" id="status">
+                                {$vo['status']?'已启用':'已禁用'}
                             </span>
                         </td>
                         <td class="td-manage">
@@ -105,7 +113,7 @@
                             href="javascript:;" title="修改密码">
                                 <i class="layui-icon">&#xe631;</i>
                             </a>
-                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')" 
+                            <a title="删除" href="javascript:;" onclick="member_del(this,'{$vo[\'id\']}')" 
                             style="text-decoration:none">
                                 <i class="layui-icon">&#xe640;</i>
                             </a>
@@ -120,14 +128,17 @@
           </div>
         </div>
         <!-- 右侧主体结束 -->
-         {/block}
     </div>
+       
     <!-- 中部结束 -->
     
   
     <!-- 页面动态效果 -->
+   
     <script>
-
+        // console.log($);
+        // alert($);
+        
         layui.use(['laydate'], function(){
           laydate = layui.laydate;//日期插件
 
@@ -175,8 +186,12 @@
          }
          /*用户-添加*/
         function member_add(title,url,w,h){
+            console.log($);
             x_admin_show(title,url,w,h);
         }
+
+        
+
         /*用户-查看*/
         function member_show(title,url,id,w,h){
             x_admin_show(title,url,w,h);
@@ -203,6 +218,13 @@
                 layer.msg('已启用!',{icon: 6,time:1000});
             });
         }
+
+        //用户状态
+        var
+        var status = $('#status').html();
+        console.log(status);
+        
+
         // 用户-编辑
         function member_edit (title,url,id,w,h) {
             x_admin_show(title,url,w,h); 
@@ -215,8 +237,21 @@
         function member_del(obj,id){
             layer.confirm('确认要删除吗？',function(index){
                 //发异步删除数据
-                $(obj).parents("tr").remove();
-                layer.msg('已删除!',{icon:1,time:1000});
+                $.ajax({
+                    type:"get",
+                    url :"delete",
+                    data:{'id':id},
+                    success:function(data){
+                        alert(data);
+                        if(data){
+                            $(obj).parents("tr").remove();
+                            layer.msg('已删除!',{icon:1,time:1000});
+                        }
+                    }
+                });
+
+
+                
             });
         }
         </script>
@@ -230,5 +265,6 @@
           s.parentNode.insertBefore(hm, s);
         })();
         </script>
+         {/block}
 </body>
 </html>
